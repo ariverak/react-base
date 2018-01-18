@@ -1,0 +1,23 @@
+{
+  "name": "demo-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack index.js bundle.js",
+    "build:local": "webpack",
+    "build:css": "webpack"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "jrivera-code",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "0.28.9",
+    "extract-text-webpack-plugin": "3.0.2",
+    "style-loader": "0.19.1",
+    "webpack": "3.10.0"
+  }
+}
