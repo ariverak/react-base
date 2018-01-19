@@ -3,21 +3,20 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 module.exports = {
     entry: {
-        index: path.resolve(__dirname,'src/js/index.js'),
-        contacto: path.resolve(__dirname,'src/js/contacto.js')
+        index: path.resolve(__dirname, 'src/js/index.js')
     },
     output: {
-        path:path.join(__dirname, 'dist'),
-        filename: 'js/[name].bundle.js'
+        path: path.join(__dirname, 'dist'),
+        filename: 'js/[name].bundle.js',
+        publicPath: "/dist/"
     },
-    devServer:{
+    devServer: {
         open: true,
         port: 3000,
-        contentBase: "./dist",
         inline: true
     },
-    module:{
-        rules:[
+    module: {
+        rules: [
             //aqui van los loaders
             {
                 // test: que tipo de archivo quiero reconocer
@@ -28,11 +27,43 @@ module.exports = {
                     // ['style-loader','css-loader']
                     use: 'css-loader'
                 })
+            },
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015','react']
+                    }
+                }
+            },
+             {
+                test: /\.json$/,
+                use: 'json-loader'
+            },
+            {
+                test: /\.(jpg|png|gif|woff|eot|ttf|svg)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 100000
+                    }
+                }
+            },
+            {
+                test: /\.(mp4|webm)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 100000,
+                        name: 'videos/[name].[hash].[ext]'
+                    }
+                }
             }
         ]
     },
-    watch:true,
-    plugins:[
-         new ExtractTextPlugin("./css/[name].css")
+    watch: true,
+    plugins: [
+        new ExtractTextPlugin("./css/[name].css")
     ]
 }
