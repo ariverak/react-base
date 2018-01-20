@@ -1,10 +1,11 @@
-import '../../style.css'
-import { message,asyncMessage} from './message';
-import fsociety from '../img/fsociety.jpg';
+import './css/style.css'
+import './css/index.scss'
+import { message,asyncMessage} from './js/message';
+import fsociety from './img/fsociety.jpg';
 import React,{Component} from 'react';
 import {render} from 'react-dom';
-import coinsData from '../coins.json';
-import Coins from './components/coins';
+import coinsData from './coins.json';
+import Coins from './js/components/coins';
 
 let title = document.getElementById('title');
 let container = document.getElementById('container');

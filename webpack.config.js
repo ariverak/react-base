@@ -3,12 +3,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 module.exports = {
     entry: {
-        index: path.resolve(__dirname, 'src/js/index.js')
+        vendor:[
+            'react',
+            'react-dom'
+        ],
+        index: path.resolve(__dirname, 'src/index.js')
     },
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'js/[name].bundle.js',
-        publicPath: "/dist/"
+        publicPath: "/dist/",
+        chunkFileName : 'js/[id].[chuckhash].js'
     },
     devServer: {
         open: true,
@@ -25,19 +30,36 @@ module.exports = {
                 //  use: ['style-loader','css-loader']
                 use: ExtractTextPlugin.extract({
                     // ['style-loader','css-loader']
-                    use: 'css-loader'
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            minimize: true
+                        }
+                    }]
                 })
             },
             {
-                test: /\.js$/,
+                // test: que tipo de archivo quiero reconocer
+                // use: que loader se va a encargar del archivo
+                test: /\.scss$/,
+                //  use: ['style-loader','css-loader']
+                use: ExtractTextPlugin.extract({
+                    // ['style-loader','css-loader']
+                    use: ['css-loader','sass-loader']
+                })
+            },
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015','react']
+                        presets: ['es2015', 'react', 'es2016'],
+                        plugins: ['syntax-dynamic-import']
                     }
                 }
             },
-             {
+            {
                 test: /\.json$/,
                 use: 'json-loader'
             },
@@ -64,6 +86,10 @@ module.exports = {
     },
     watch: true,
     plugins: [
-        new ExtractTextPlugin("./css/[name].css")
+        new ExtractTextPlugin("./css/[name].css"),
+        new webpack.optimize.CommonsChunkPlugin({
+            name : 'vendor',
+            minChunks: Infinity
+        })
     ]
 }
