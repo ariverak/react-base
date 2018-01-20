@@ -13,7 +13,7 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: 'js/[name].bundle.js',
         publicPath: "/dist/",
-        chunkFileName : 'js/[id].[chuckhash].js'
+        chunkFilename : 'js/[id].[chunkhash].js'
     },
     devServer: {
         open: true,
