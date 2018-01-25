@@ -7,7 +7,7 @@ module.exports = {
             'react',
             'react-dom'
         ],
-        index: path.resolve(__dirname, 'src/index.js')
+        home: path.resolve(__dirname, 'src/home.js')
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -54,7 +54,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015', 'react', 'es2016'],
+                        presets: ['es2015', 'react','stage-2'],
                         plugins: ['syntax-dynamic-import']
                     }
                 }

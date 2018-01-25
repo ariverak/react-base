@@ -1,6 +1,6 @@
-import './css/style.css'
-import './css/index.scss'
-import { message,asyncMessage} from './js/message';
+import './css/home.css'
+import './css/home.scss'
+import message from './js/message';
 import fsociety from './img/fsociety.jpg';
 import React,{Component} from 'react';
 import {render} from 'react-dom';
@@ -18,5 +18,3 @@ h1.textContent = message;
 title.append(img)
 title.append(h1)
 render(<Coins data={coinsData}/>,document.getElementById('container'));
-
-asyncMessage();
